@@ -164,7 +164,6 @@ namespace FluentResults
             return ResultHelper.HasException(Errors, predicate, out result);
         }
 
-        
 
         /// <summary>
         /// Check if the result object contains a success from a specific type
@@ -219,6 +218,7 @@ namespace FluentResults
         /// </summary>
         /// <param name="isSuccess"></param>
         /// <param name="isFailed"></param>
+        [Obsolete]
         public void Deconstruct(out bool isSuccess, out bool isFailed)
         {
             isSuccess = IsSuccess;
@@ -231,6 +231,7 @@ namespace FluentResults
         /// <param name="isSuccess"></param>
         /// <param name="isFailed"></param>
         /// <param name="errors"></param>
+        [Obsolete]
         public void Deconstruct(out bool isSuccess, out bool isFailed, out List<IError> errors)
         {
             isSuccess = IsSuccess;
@@ -464,8 +465,8 @@ namespace FluentResults
         public override string ToString()
         {
             var reasonsString = Reasons.Any()
-                                    ? $", Reasons='{ReasonFormat.ReasonsToString(Reasons)}'"
-                                    : string.Empty;
+                ? $", Reasons='{ReasonFormat.ReasonsToString(Reasons)}'"
+                : string.Empty;
 
             return $"Result: IsSuccess='{IsSuccess}'{reasonsString}";
         }
