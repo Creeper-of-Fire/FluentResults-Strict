@@ -14,8 +14,7 @@ namespace FluentResults
         /// <summary>
         /// Default constructor
         /// </summary>
-        public Result()
-        { }
+        public Result() { }
 
         /// <summary>
         /// Map all errors of the result via errorMapper
@@ -69,7 +68,7 @@ namespace FluentResults
         {
             var result = new Result<TNewValue>();
             result.WithReasons(Reasons);
-            
+
             if (IsSuccess)
             {
                 var converted = bind();
@@ -79,7 +78,7 @@ namespace FluentResults
 
             return result;
         }
-        
+
         /// <summary>
         /// Convert result to result with value that may fail asynchronously.
         /// </summary>
@@ -93,7 +92,7 @@ namespace FluentResults
         {
             var result = new Result<TNewValue>();
             result.WithReasons(Reasons);
-            
+
             if (IsSuccess)
             {
                 var converted = await bind();
@@ -103,7 +102,7 @@ namespace FluentResults
 
             return result;
         }
-        
+
         /// <summary>
         /// Convert result to result with value that may fail asynchronously.
         /// </summary>
@@ -117,7 +116,7 @@ namespace FluentResults
         {
             var result = new Result<TNewValue>();
             result.WithReasons(Reasons);
-            
+
             if (IsSuccess)
             {
                 var converted = await bind();
@@ -127,7 +126,7 @@ namespace FluentResults
 
             return result;
         }
-        
+
         /// <summary>
         /// Execute an action which returns a <see cref="Result"/>.
         /// </summary>
@@ -141,7 +140,7 @@ namespace FluentResults
         {
             var result = new Result();
             result.WithReasons(Reasons);
-            
+
             if (IsSuccess)
             {
                 var converted = action();
@@ -150,7 +149,7 @@ namespace FluentResults
 
             return result;
         }
-        
+
         /// <summary>
         /// Execute an action which returns a <see cref="Result"/> asynchronously.
         /// </summary>
@@ -164,7 +163,7 @@ namespace FluentResults
         {
             var result = new Result();
             result.WithReasons(Reasons);
-            
+
             if (IsSuccess)
             {
                 var converted = await action();
@@ -173,7 +172,7 @@ namespace FluentResults
 
             return result;
         }
-        
+
         /// <summary>
         /// Execute an action which returns a <see cref="Result"/> asynchronously.
         /// </summary>
@@ -187,7 +186,7 @@ namespace FluentResults
         {
             var result = new Result();
             result.WithReasons(Reasons);
-            
+
             if (IsSuccess)
             {
                 var converted = await action();
@@ -196,7 +195,7 @@ namespace FluentResults
 
             return result;
         }
-        
+
         /// <summary>
         /// Implict conversion from <see cref="Error"/> to a <see cref="Result"/>
         /// </summary>
@@ -225,11 +224,13 @@ namespace FluentResults
         /// <summary>
         /// Get the Value. If result is failed then an Exception is thrown because a failed result has no value. Opposite see property ValueOrDefault.
         /// </summary>
+        [Obsolete]
         TValue Value { get; }
 
         /// <summary>
         /// Get the Value. If result is failed then a default value is returned. Opposite see property Value.
         /// </summary>
+        [Obsolete]
         TValue ValueOrDefault { get; }
     }
 
@@ -242,19 +243,20 @@ namespace FluentResults
         /// <summary>
         /// Default constructor
         /// </summary>
-        public Result()
-        { }
+        public Result() { }
 
         private TValue _value;
 
         /// <summary>
         /// <inheritdoc/>
         /// </summary>
+        [Obsolete]
         public TValue ValueOrDefault => _value;
 
         /// <summary>
         /// <inheritdoc/>
         /// </summary>
+        [Obsolete]
         public TValue Value
         {
             get
@@ -334,8 +336,8 @@ namespace FluentResults
                 throw new ArgumentException("If result is success then valueConverter should not be null");
 
             return new Result<TNewValue>()
-                   .WithValue(IsFailed ? default : mapLogic(Value))
-                   .WithReasons(Reasons);
+                .WithValue(IsFailed ? default : mapLogic(Value))
+                .WithReasons(Reasons);
         }
 
         /// <summary>
@@ -354,7 +356,7 @@ namespace FluentResults
         {
             var result = new Result<TNewValue>();
             result.WithReasons(Reasons);
-            
+
             if (IsSuccess)
             {
                 var converted = bind(Value);
@@ -364,7 +366,7 @@ namespace FluentResults
 
             return result;
         }
-        
+
         /// <summary>
         /// Convert result with value to result with another value that may fail asynchronously.
         /// </summary>
@@ -378,7 +380,7 @@ namespace FluentResults
         {
             var result = new Result<TNewValue>();
             result.WithReasons(Reasons);
-            
+
             if (IsSuccess)
             {
                 var converted = await bind(Value);
@@ -388,7 +390,7 @@ namespace FluentResults
 
             return result;
         }
-        
+
         /// <summary>
         /// Convert result with value to result with another value that may fail asynchronously.
         /// </summary>
@@ -402,7 +404,7 @@ namespace FluentResults
         {
             var result = new Result<TNewValue>();
             result.WithReasons(Reasons);
-            
+
             if (IsSuccess)
             {
                 var converted = await bind(Value);
@@ -435,7 +437,7 @@ namespace FluentResults
 
             return result;
         }
-        
+
         /// <summary>
         /// Execute an action which returns a <see cref="Result"/> asynchronously.
         /// </summary>
@@ -458,7 +460,7 @@ namespace FluentResults
 
             return result;
         }
-        
+
         /// <summary>
         /// Execute an action which returns a <see cref="Result"/> asynchronously.
         /// </summary>
@@ -518,7 +520,7 @@ namespace FluentResults
 
             return Result.Ok(value);
         }
-        
+
         /// <summary>
         /// Implicit conversion of an <see cref="Error"/> to <see cref="Result{TValue}"/>
         /// </summary>
@@ -541,6 +543,7 @@ namespace FluentResults
         /// <param name="isSuccess"></param>
         /// <param name="isFailed"></param>
         /// <param name="value"></param>
+        [Obsolete]
         public void Deconstruct(out bool isSuccess, out bool isFailed, out TValue value)
         {
             isSuccess = IsSuccess;
@@ -555,6 +558,7 @@ namespace FluentResults
         /// <param name="isFailed"></param>
         /// <param name="value"></param>
         /// <param name="errors"></param>
+        [Obsolete]
         public void Deconstruct(out bool isSuccess, out bool isFailed, out TValue value, out List<IError> errors)
         {
             isSuccess = IsSuccess;
@@ -566,7 +570,8 @@ namespace FluentResults
         private void ThrowIfFailed()
         {
             if (IsFailed)
-                throw new InvalidOperationException($"Result is in status failed. Value is not set. Having: {ReasonFormat.ErrorReasonsToString(Errors)}");
+                throw new InvalidOperationException(
+                    $"Result is in status failed. Value is not set. Having: {ReasonFormat.ErrorReasonsToString(Errors)}");
         }
     }
 }
