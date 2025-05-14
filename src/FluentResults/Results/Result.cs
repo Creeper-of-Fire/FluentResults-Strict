@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 // ReSharper disable once CheckNamespace
@@ -271,6 +272,43 @@ namespace FluentResults
 
                 _value = value;
             }
+        }
+
+        /// <summary>
+        /// 尝试从成功的 Result 获取值。
+        /// </summary>
+        /// <param name="value">如果操作成功，则输出结果的值；否则为 default(TValue)。</param>
+        /// <returns>如果结果成功，则返回 true；否则返回 false。</returns>
+        public bool TryGetValue([MaybeNullWhen(false)] out TValue value)
+        {
+            if (IsSuccess)
+            {
+                value = Value; // 直接访问内部的 Value 属性
+                return true;
+            }
+
+            value = default; // 对于引用类型是 null，对于值类型是其默认值
+            return false;
+        }
+
+        /// <summary>
+        /// 尝试从成功的 Result 获取值，并在失败时提供错误信息。
+        /// </summary>
+        /// <param name="value">如果操作成功，则输出结果的值；否则为 default(TValue)。</param>
+        /// <param name="errors">如果操作失败，则输出错误列表；否则为 null 或空集合。</param>
+        /// <returns>如果结果成功，则返回 true；否则返回 false。</returns>
+        public bool TryGetValue([MaybeNullWhen(false)] out TValue value, [MaybeNullWhen(true)] out IReadOnlyList<IError> errors)
+        {
+            if (IsSuccess)
+            {
+                value = Value; // 直接访问内部的 Value 属性
+                errors = null; // 或者 System.Array.Empty<IError>(); 保持与接口一致
+                return true;
+            }
+
+            value = default;
+            errors = Errors; // Errors 属性通常返回 IReadOnlyList<IError>
+            return false;
         }
 
         /// <summary>

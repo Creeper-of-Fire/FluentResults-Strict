@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+    <TargetFramework>net9.0</TargetFramework>
     <PackageId>FluentResults.Strict.CreeperOfFire</PackageId>
-    <Version>3.16.0.0-strict</Version>
+    <Version>3.16.0.0-strict.1</Version>
     
     <Authors>Creeper of Fire</Authors>
     <Description>A customized version of FluentResults with stricter Value access.</Description>
@@ -10,7 +10,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReleaseNotes>
       Based on FluentResults v3.16.0.
-      - MODIFIED: Marked Result.Value as [Obsolete(error: true)] to enforce safer access patterns.
+      - Add TryGetValue.
     </PackageReleaseNotes>
     <Copyright>Copyright 2024 (c) Michael Altmann. All rights reserved. Copyright 2025 (c) Creeper of Fire.</Copyright>
     <PackageTags>Result Results exception error handling</PackageTags>
